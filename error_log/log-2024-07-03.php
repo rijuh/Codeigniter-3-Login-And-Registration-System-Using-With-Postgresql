@@ -77,3 +77,5 @@ LINE 1: ...ender&quot;, &quot;mobile_no&quot;, &quot;email&quot;) VALUES ('', ''
 ERROR - 2024-07-03 12:02:50 --> Query error: ERROR:  invalid input syntax for integer: ""
 LINE 1: ...ender", "mobile_no", "email") VALUES ('', '', '', '', '', 'C...
                                                              ^ - Invalid query: INSERT INTO "userinfo" ("fname", "mname", "lname", "age", "dob", "gender", "mobile_no", "email") VALUES ('', '', '', '', '', 'Choose...', '', '')
+ERROR - 2024-07-03 23:42:19 --> 404 Page Not Found: Ums_controller/login
+ERROR - 2024-07-03 23:54:20 --> 404 Page Not Found: Ums_controller/login_data

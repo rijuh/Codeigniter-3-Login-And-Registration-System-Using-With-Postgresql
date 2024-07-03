@@ -9,3 +9,10 @@ CREATE TABLE userinfo (
 	mobile_no NUMERIC(10, 0),
 	email VARCHAR(50)
 );
+
+CREATE TABLE userlogin (
+	login_id SERIAL PRIMARY KEY,
+	name VARCHAR(80),
+	email VARCHAR(100),
+	password VARCHAR(100)
+);

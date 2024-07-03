@@ -54,3 +54,5 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['registration-page'] = 'Ums_controller/index';
 $route['register'] = 'Ums_controller/insert_data';
+$route['login'] = 'Ums_controller/login_data';
+$route['dashboard'] = 'Ums_controller/dashboard';

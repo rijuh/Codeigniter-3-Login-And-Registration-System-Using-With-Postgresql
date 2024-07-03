@@ -90,4 +90,30 @@ class Ums_controller extends CI_Controller
         }
         $this->load->view('Register_view');
     }
+
+    public function login_data()
+    {
+        if ($this->input->server('REQUEST_METHOD') === 'POST')
+        {
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+            $user = $this->Ums_model->login_user($email);
+            if($user && $user['password'] == $password)
+            {
+                return redirect(base_url('dashboard'), 'refresh');
+                // $this->session->set_flashdata('LoginDone', 'Can not logged in');
+            }
+            else
+            {
+                $this->session->set_flashdata('LoginFailed', 'Can not logged in');
+            }
+        }
+        $this->load->view('Login_view');
+    }
+
+    public function dashboard()
+    {
+        $data['all_data'] = $this->Ums_model->get_data();
+        $this->load->view('Dashboard_view', $data);
+    }
 }

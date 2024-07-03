@@ -5,34 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    
-    <script>
-        function validate_data()
-        {
-            var fname = document.getElementById('firstName').value;
-            var mname = document.getElementById('middleName').value;
-            var lname = document.getElementById('lastName').value;
-            var age = document.getElementById('age').value;
-            var dob = document.getElementById('dob').value;
-            var gender = document.getElementById('gender').value;
-            var mobile = document.getElementById('mobile').value;
-            var email = document.getElementById('email').value;
-            if(fname == '')
-            {
-                //alert('cfhg');
-                //document.getElementById("fname_em").value = "First name required";
-                $("#fname_em").html("new File");
-                
-            }
-            return false;
+    <style>
+        .add-more {
+            margin-top: 10px;
         }
-    </script>
+        .delete-row {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5 d-flex justify-content-center">
         <div class="col-md-12">
             <h2 class="text-left">User Registration:</h2>
-            <div class="card">
+            <div class="card mb-5">
+
+                <!-- PERSONAL DETAILS SECTION -->
                 <div class="card-header bg-dark text-white text-center">
                     PERSONAL DETAILS
                 </div>
@@ -47,7 +36,7 @@
                             <div class="form-group col-md-4">
                                 <label for="firstName">Name*</label>
                                 <input type="text" class="form-control" id="firstName" placeholder="First Name" value="<?php echo set_value('fname'); ?>" name="fname">
-                                <em id="fname_em">hhh</em>
+                                <em id="fname_em"></em>
                                 <?php echo form_error('fname', '<div class="error">', '</div>'); ?>
                             </div>
                             <div class="form-group col-md-4">
@@ -99,7 +88,42 @@
                                 <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>
-                        <div class="form-group text-right">
+            
+                        <!-- EDUCATIONAL QUALIFICATION SECTION -->
+                        <div class="card mb-5">
+                            <div class="card-header bg-dark text-white text-center">
+                                EDUCATIONAL QUALIFICATION
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Exam Name</th>
+                                            <th>Year of Passing</th>
+                                            <th>Institution Name</th>
+                                            <th>Marks Obtain</th>
+                                            <th>Out of</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="education-body">
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input type="text" class="form-control" placeholder="Exam Name" required></td>
+                                            <td><input type="text" class="form-control" placeholder="Year of Passing" required></td>
+                                            <td><input type="text" class="form-control" placeholder="Institution Name" required></td>
+                                            <td><input type="text" class="form-control" placeholder="Marks Obtain" required></td>
+                                            <td><input type="text" class="form-control" placeholder="Out of" required></td>
+                                            <td><span class="delete-row">&times;</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" class="btn btn-secondary add-more" id="add-more">Add More</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-right mt-4">
                             <button type="submit" class="btn btn-primary">Register</button>
                         </div>
                     </form>
@@ -111,5 +135,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let rowCount = 1;
+
+            $('#add-more').click(function() {
+                rowCount++;
+                $('#education-body').append(`
+                    <tr>
+                        <td>${rowCount}</td>
+                        <td><input type="text" class="form-control" placeholder="Exam Name" required></td>
+                        <td><input type="text" class="form-control" placeholder="Year of Passing" required></td>
+                        <td><input type="text" class="form-control" placeholder="Institution Name" required></td>
+                        <td><input type="text" class="form-control" placeholder="Marks Obtain" required></td>
+                        <td><input type="text" class="form-control" placeholder="Out of" required></td>
+                        <td><span class="delete-row">&times;</span></td>
+                    </tr>
+                `);
+            });
+
+            // Delegate click event to dynamically added delete buttons
+            $('#education-body').on('click', '.delete-row', function() {
+                $(this).closest('tr').remove();
+                rowCount--;
+                updateRowNumbers();
+            });
+
+            function updateRowNumbers() {
+                $('#education-body tr').each(function(index) {
+                    $(this).find('td:first').text(index + 1);
+                });
+            }
+        });
+    </script>
 </body>
 </html>

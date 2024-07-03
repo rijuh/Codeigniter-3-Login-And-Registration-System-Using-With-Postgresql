@@ -19,4 +19,16 @@ class Ums_model extends CI_Model {
             return false;
         }
     }
+
+    public function login_user($email)
+    {
+        $user = $this->db->select('*')->from('userlogin')->where('email', $email)->get()->row_array();
+        return $user;
+    }
+
+    public function get_data()
+    {
+        $data = $this->db->select("id, CONCAT(fname, ' ', mname, ' ', lname) AS name, age, dob, gender, mobile_no, email")->from('userinfo')->get()->result_array();
+        return $data;
+    }
 }
