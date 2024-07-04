@@ -95,18 +95,37 @@ class Ums_controller extends CI_Controller
     {
         if ($this->input->server('REQUEST_METHOD') === 'POST')
         {
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $user = $this->Ums_model->login_user($email);
-            if($user && $user['password'] == $password)
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email',
+                array
+                (
+                    'required' => 'You must provide %s',
+                    'valid_email' => 'Enter a valid %s'
+                )
+            );
+            $this->form_validation->set_rules('password', 'Password', 'required',
+                array('required' => 'You must provide %s')
+            );
+
+            if($this->form_validation->run() == false)
             {
-                return redirect(base_url('dashboard'), 'refresh');
-                // $this->session->set_flashdata('LoginDone', 'Can not logged in');
+                return $this->load->view('Login_view');
             }
             else
             {
-                $this->session->set_flashdata('LoginFailed', 'Can not logged in');
+                $email = $this->input->post('email');
+                $password = $this->input->post('password');
+                $user = $this->Ums_model->login_user($email);
+                if($user && $user['password'] == $password)
+                {
+                    return redirect(base_url('dashboard'), 'refresh');
+                    // $this->session->set_flashdata('LoginDone', 'Can not logged in');
+                }
+                else
+                {
+                    $this->session->set_flashdata('LoginFailed', 'Can not logged in');
+                }
             }
+
         }
         $this->load->view('Login_view');
     }

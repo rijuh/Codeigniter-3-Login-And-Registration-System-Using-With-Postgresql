@@ -110,11 +110,11 @@
                                     <tbody id="education-body">
                                         <tr>
                                             <td>1</td>
-                                            <td><input type="text" class="form-control" placeholder="Exam Name" required></td>
-                                            <td><input type="text" class="form-control" placeholder="Year of Passing" required></td>
-                                            <td><input type="text" class="form-control" placeholder="Institution Name" required></td>
-                                            <td><input type="text" class="form-control" placeholder="Marks Obtain" required></td>
-                                            <td><input type="text" class="form-control" placeholder="Out of" required></td>
+                                            <td><input type="text" class="form-control" placeholder="Exam Name"></td>
+                                            <td><input type="text" class="form-control" placeholder="Year of Passing"></td>
+                                            <td><input type="text" class="form-control" placeholder="Institution Name"></td>
+                                            <td><input type="text" class="form-control" placeholder="Marks Obtain"></td>
+                                            <td><input type="text" class="form-control" placeholder="Out of"></td>
                                             <td><span class="delete-row">&times;</span></td>
                                         </tr>
                                     </tbody>
@@ -154,7 +154,7 @@
                 `);
             });
 
-            // Delegate click event to dynamically added delete buttons
+            
             $('#education-body').on('click', '.delete-row', function() {
                 $(this).closest('tr').remove();
                 rowCount--;

@@ -37,7 +37,7 @@
         }
     </style>
 </head>
-<body>
+<body oncopy="return true" oncut="return true" onpaste="return true ">
     <div class="container">
         <div class="login-container">
             <?php if($this->session->flashdata('LoginFailed')) {?>
@@ -46,21 +46,26 @@
                 </div>
             <?php } ?>
             <h2 class="text-center login-title">Login Section</h2>
-            <form method="post" action="<?php echo base_url('login'); ?>">
+            <form method="post" action="<?php echo base_url('login'); ?>" onsubmit="return validate_data()">
                 <div class="form-group">
                     <label for="loginId">Login Id*</label>
-                    <input type="text" class="form-control" id="loginId" placeholder="Enter your login id" name="email">
+                    <input type="text" class="form-control" id="email" placeholder="Enter your login id" name="email" autocomplete="off">
+                    <em id="email-em"></em>
+                    <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                 </div>
                 <div class="form-group">
                     <label for="password">Password*</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password">
+                    <em id="password-em"></em>
+                    <?php echo form_error('password', '<div class="error">', '</div>'); ?>
                 </div>
                 <div class="form-group">
                     <label for="generatedText">Generated Text:</label>
                     <span id="generatedText" class="generated-text"></span>
-                    <input type="text" class="form-control" id="generatedTextInput" placeholder="Enter the above text" name="captcha">
+                    <input type="text" class="form-control" id="enterCaptcha" placeholder="Enter the above text" name="enterCaptcha">
+                    <em id="captcha-em"></em>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block login-button">Sign In</button>
+                <button type="submit" class="btn btn-primary btn-block login-button" id="submit-btn">Sign In</button>
                 <div class="forgot-password mt-3">
                     <a href="#">Forgot Your Password?</a>
                 </div>
@@ -74,7 +79,8 @@
     <!-- JavaScript to generate random text -->
     <script>
         // Function to generate random alphanumeric text
-        function generateRandomText(length) {
+        function generateRandomText(length)
+        {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let result = '';
             const charactersLength = characters.length;
@@ -85,10 +91,84 @@
         }
 
         // Generate and display the random text when the page loads
-        document.addEventListener('DOMContentLoaded', (event) => {
+            document.addEventListener('DOMContentLoaded', (event) => {
             const randomText = generateRandomText(7);
             document.getElementById('generatedText').innerText = randomText;
+            document.getElementById('generatedText').dataset.captcha = randomText;
         });
+
+        function isEmail(email)
+        {
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(emailPattern.test(email))
+            {
+                return true;
+            }
+            else
+            {
+                $("#email-em").text("Enter valid Email");
+                $("#email-em").css('color', 'red');
+                return false;
+            }
+        }
+
+        function isPassword(password)
+        {
+            if(password == '')
+            {
+                $("#password-em").text("Enter valid Password");
+                $("#password-em").css('color', 'red');
+                return false;
+            }
+            else
+            {
+                if(password.length < 5)
+                {
+                    $("#password-em").text("Length should be minimum 5");
+                    $("#password-em").css('color', 'red');
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        function isCaptcha(generatedText, enterCaptcha)
+        {
+            if(enterCaptcha == generatedText)
+            {
+                alert("Captcha Matched");
+                return true;
+            }
+            else
+            {
+                alert("Captcha Not Matched");
+                $("#captcha-em").text("Invalid captcha");
+                $("#captcha-em").css('color', 'red');
+                return false;
+            }
+        }
+
+        function validate_data()
+        {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            //VERIFYING CAPTCHA
+            const generatedText = document.getElementById('generatedText').dataset.captcha;
+            const enterCaptcha = document.getElementById('enterCaptcha').value;
+
+            // isEmail(email);
+            // isPassword(password);
+            // isCaptcha(generatedText, enterCaptcha);
+            if(isEmail(email) && isPassword(password) && isCaptcha(generatedText, enterCaptcha))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     </script>
 </body>
 </html>
