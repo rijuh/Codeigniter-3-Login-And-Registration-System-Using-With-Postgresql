@@ -6,6 +6,7 @@
     <title>Login Page</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         .login-container {
             max-width: 400px;
@@ -38,6 +39,7 @@
     </style>
 </head>
 <body oncopy="return true" oncut="return true" onpaste="return true ">
+    <?php $this->load->view('Navbar_view'); ?>
     <div class="container">
         <div class="login-container">
             <?php if($this->session->flashdata('LoginFailed')) {?>
@@ -46,10 +48,10 @@
                 </div>
             <?php } ?>
             <h2 class="text-center login-title">Login Section</h2>
-            <form method="post" action="<?php echo base_url('login'); ?>" onsubmit="return validate_data()">
+            <form method="post" action="<?php echo base_url('login'); ?>" onsubmit="return validate_data1()">
                 <div class="form-group">
                     <label for="loginId">Login Id*</label>
-                    <input type="text" class="form-control" id="email" placeholder="Enter your login id" name="email" autocomplete="off">
+                    <input type="text" class="form-control" id="email" placeholder="Enter your login id" value="<?php echo set_value('email'); ?>" name="email" autocomplete="off">
                     <em id="email-em"></em>
                     <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                 </div>
@@ -73,6 +75,7 @@
         </div>
     </div>
     <!-- Bootstrap JS and dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -136,12 +139,10 @@
         {
             if(enterCaptcha == generatedText)
             {
-                alert("Captcha Matched");
                 return true;
             }
             else
             {
-                alert("Captcha Not Matched");
                 $("#captcha-em").text("Invalid captcha");
                 $("#captcha-em").css('color', 'red');
                 return false;
@@ -157,10 +158,13 @@
             const generatedText = document.getElementById('generatedText').dataset.captcha;
             const enterCaptcha = document.getElementById('enterCaptcha').value;
 
-            // isEmail(email);
-            // isPassword(password);
-            // isCaptcha(generatedText, enterCaptcha);
-            if(isEmail(email) && isPassword(password) && isCaptcha(generatedText, enterCaptcha))
+            const validations =
+            [
+                isEmail(email),
+                isPassword(password),
+                isCaptcha(generatedText, enterCaptcha)
+            ];
+            if(validations.every(validation => validation == true))
             {
                 return true;
             }

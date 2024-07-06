@@ -50,3 +50,4 @@ ERROR - 2024-07-04 01:31:35 --> Severity: Warning --> Undefined array key "fulln
 ERROR - 2024-07-04 01:31:35 --> Severity: Warning --> Undefined array key "fullname" C:\xampp\htdocs\ums\application\views\Dashboard_view.php 77
 ERROR - 2024-07-04 01:31:35 --> Severity: Warning --> Undefined array key "fullname" C:\xampp\htdocs\ums\application\views\Dashboard_view.php 77
 ERROR - 2024-07-04 01:31:35 --> Severity: Warning --> Undefined array key "fullname" C:\xampp\htdocs\ums\application\views\Dashboard_view.php 77
+ERROR - 2024-07-04 18:56:11 --> 404 Page Not Found: Rlogin/index
