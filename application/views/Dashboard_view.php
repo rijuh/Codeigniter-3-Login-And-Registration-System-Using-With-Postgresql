@@ -74,15 +74,15 @@
                 <tbody>
                     <?php $i=1; ?>
                     <?php foreach($all_data as $ad) { ?>
-                    <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $ad['name']; ?></td>
-                        <td><?php echo $ad['age']; ?></td>
-                        <td><?php echo $ad['dob']; ?></td>
-                        <td><?php echo $ad['gender']; ?></td>
-                        <td>+91 <?php echo $ad['mobile_no']; ?></td>
-                        <td><?php echo $ad['email']; ?></td>
-                    </tr>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo $ad['name']; ?></td>
+                            <td><?php echo $ad['age']; ?></td>
+                            <td><?php echo $ad['dob']; ?></td>
+                            <td><?php echo $ad['gender']; ?></td>
+                            <td>+91 <?php echo $ad['mobile_no']; ?></td>
+                            <td><?php echo $ad['email']; ?></td>
+                        </tr>
                     <?php
                         $i++;
                     }

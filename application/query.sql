@@ -16,3 +16,6 @@ CREATE TABLE userlogin (
 	email VARCHAR(100),
 	password VARCHAR(100)
 );
+
+ALTER TABLE userlogin
+ADD level VARCHAR(10);

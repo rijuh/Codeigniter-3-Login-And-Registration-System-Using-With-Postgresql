@@ -117,6 +117,12 @@ class Ums_controller extends CI_Controller
                 $user = $this->Ums_model->login_user($email);
                 if($user && $user['password'] == $password)
                 {
+                    $user_data = array
+                    (
+                        'email' => $email,
+                        'islogin' => true
+                    );
+                    $this->session->set_userdata($user_data);
                     return redirect(base_url('dashboard'), 'refresh');
                     // $this->session->set_flashdata('LoginDone', 'Can not logged in');
                 }
@@ -130,9 +136,14 @@ class Ums_controller extends CI_Controller
         $this->load->view('Login_view');
     }
 
-    public function dashboard()
-    {
-        $data['all_data'] = $this->Ums_model->get_data();
-        $this->load->view('Dashboard_view', $data);
-    }
+    // public function dashboard()
+    // {
+    //     $data['all_data'] = $this->Ums_model->get_data();
+    //     $this->load->view('Dashboard_view', $data);
+    // }
+
+    // public function new_dashboard()
+    // {
+    //     $this->load->view('New_dashboard');
+    // }
 }

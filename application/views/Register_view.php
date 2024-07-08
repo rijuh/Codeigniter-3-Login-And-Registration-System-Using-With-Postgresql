@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="mobile">Mobile No*:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -89,11 +89,17 @@
                                 <em id="mobile-em"></em>
                                 <?php echo form_error('mobile', '<div class="error">', '</div>'); ?>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="email">Email*</label>
                                 <input type="email" class="form-control" id="email" placeholder="Email ID" value="<?php echo set_value('email'); ?>" name="email">
                                 <em id="email-em"></em>
                                 <?php echo form_error('email', '<div class="error">', '</div>'); ?>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="password">Password*</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter Password" value="<?php echo set_value('password'); ?>" name="password">
+                                <em id="password-em"></em>
+                                
                             </div>
                         </div>
             
