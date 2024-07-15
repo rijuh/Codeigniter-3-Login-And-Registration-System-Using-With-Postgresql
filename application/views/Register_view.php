@@ -29,8 +29,9 @@
                 </div>
                 <div class="card-body">
                     <?php if($this->session->flashdata('success')){ ?>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             Registered successfully
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php } ?>
                     <form method="POST" action="<?php echo base_url('register'); ?>" onsubmit="return validate_data()">
@@ -78,7 +79,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="mobile">Mobile No*:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -89,17 +90,27 @@
                                 <em id="mobile-em"></em>
                                 <?php echo form_error('mobile', '<div class="error">', '</div>'); ?>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="email">Email*</label>
                                 <input type="email" class="form-control" id="email" placeholder="Email ID" value="<?php echo set_value('email'); ?>" name="email">
                                 <em id="email-em"></em>
                                 <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="password">Password*</label>
                                 <input type="password" class="form-control" id="password" placeholder="Enter Password" value="<?php echo set_value('password'); ?>" name="password">
                                 <em id="password-em"></em>
-                                
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="level">Level*</label>
+                                <select id="level" class="form-control" name="level" value="<?php echo set_value('level'); ?>">
+                                    <option selected>Choose...</option>
+                                    <option>Admin</option>
+                                    <option>Senior</option>
+                                    <option>Entry</option>
+                                </select>
+                                <em id="level-em"></em>
+                                <?php echo form_error('level', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>
             
@@ -125,23 +136,23 @@
                                         <tr>
                                             <td>1</td>
                                             <td>
-                                                <input type="text" class="form-control" placeholder="Exam Name">
+                                                <input type="text" class="form-control" name="exam_name[]" placeholder="Exam Name">
                                                 <em class="error"></em>
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" placeholder="Year of Passing">
+                                                <input type="number" class="form-control" name="yop[]" placeholder="Year of Passing">
                                                 <em class="error"></em>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" placeholder="Institution Name">
+                                                <input type="text" class="form-control" name="inst_name[]" placeholder="Institution Name">
                                                 <em class="error"></em>
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" placeholder="Marks Obtain">
+                                                <input type="number" class="form-control" name="o_marks[]" placeholder="Marks Obtain">
                                                 <em class="error"></em>
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" placeholder="Out of">
+                                                <input type="number" class="form-control" name="f_marks[]" placeholder="Out of">
                                                 <em class="error"></em>
                                             </td>
                                             <td><span class="delete-row">&times;</span></td>
@@ -175,23 +186,23 @@
                     <tr>
                         <td>${rowCount}</td>
                         <td>
-                            <input type="text" class="form-control" placeholder="Exam Name">
+                            <input type="text" class="form-control" name="exam_name[]" placeholder="Exam Name">
                             <em class="error"></em>
                         </td>
                         <td>
-                            <input type="number" class="form-control" placeholder="Year of Passing">
+                            <input type="number" class="form-control" name="yop[]" placeholder="Year of Passing">
                             <em class="error"></em>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="Institution Name">
+                            <input type="text" class="form-control" name="inst_name[]" placeholder="Institution Name">
                             <em class="error"></em>
                         </td>
                         <td>
-                            <input type="number" class="form-control" placeholder="Marks Obtain">
+                            <input type="number" class="form-control" name="o_marks[]"  placeholder="Marks Obtain">
                             <em class="error"></em>
                         </td>
                         <td>
-                            <input type="number" class="form-control" placeholder="Out of">
+                            <input type="number" class="form-control" name="f_marks[]" placeholder="Out of">
                             <em class="error"></em>
                         </td>
                         <td><span class="delete-row">&times;</span></td>
@@ -216,136 +227,136 @@
             }
         });
 
-        function isName(name)
-        {
-            if(name == '')
-            {
-                // alert('Name Not Validate');
-                $('.name-em').text('Enter valid name');
-                $('.name-em').css('color', 'red');
-                return false;
-            }
-            return true;
-        }
+        // function isName(name)
+        // {
+        //     if(name == '')
+        //     {
+        //         // alert('Name Not Validate');
+        //         $('.name-em').text('Enter valid name');
+        //         $('.name-em').css('color', 'red');
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
-        function isAge(age)
-        {
-            if(age == '' || (age.toString()).length > 2)
-            {
-                // alert('Age Not Validate');
-                $('#age-em').text('Enter valid age');
-                $('#age-em').css('color', 'red');
-                return false;
-            }
-            return true;
-        }
+        // function isAge(age)
+        // {
+        //     if(age == '' || (age.toString()).length > 2)
+        //     {
+        //         // alert('Age Not Validate');
+        //         $('#age-em').text('Enter valid age');
+        //         $('#age-em').css('color', 'red');
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
-        function isDob(dob)
-        {
-            if(dob == '')
-            {
-                $('#dob-em').text('Enter valid DOB');
-                $('#dob-em').css('color', 'red');
-                return false;
-            }
-            return true;
-        }
+        // function isDob(dob)
+        // {
+        //     if(dob == '')
+        //     {
+        //         $('#dob-em').text('Enter valid DOB');
+        //         $('#dob-em').css('color', 'red');
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
-        function isGender(gender)
-        {
-            if(gender == 'Choose...')
-            {
-                $('#gender-em').text('Enter valid Gender');
-                $('#gender-em').css('color', 'red');
-                return false;
-            }
-            return true;
-        }
+        // function isGender(gender)
+        // {
+        //     if(gender == 'Choose...')
+        //     {
+        //         $('#gender-em').text('Enter valid Gender');
+        //         $('#gender-em').css('color', 'red');
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
-        function isMobile(mobile)
-        {
-            if((mobile.toString()).length == 10)
-            {
-                return true;
-            }
-            else
-            {
-                $('#mobile-em').text('Enter valid Mobile');
-                $('#mobile-em').css('color', 'red');
-                return false;
-            }
-        }
+        // function isMobile(mobile)
+        // {
+        //     if((mobile.toString()).length == 10)
+        //     {
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         $('#mobile-em').text('Enter valid Mobile');
+        //         $('#mobile-em').css('color', 'red');
+        //         return false;
+        //     }
+        // }
 
-        function isEmail(email)
-        {
-            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if(emailPattern.test(email))
-            {
-                return true;
-            }
-            else
-            {
-                $("#email-em").text("Enter valid Email");
-                $("#email-em").css('color', 'red');
-                return false;
-            }
-        }
+        // function isEmail(email)
+        // {
+        //     var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        //     if(emailPattern.test(email))
+        //     {
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         $("#email-em").text("Enter valid Email");
+        //         $("#email-em").css('color', 'red');
+        //         return false;
+        //     }
+        // }
 
-        function isEducation()
-        {
-            let isValid = true;
-            $('#education-body tr').each(function()
-            {
-                $(this).find('input').each(function()
-                {
-                    if ($(this).val() === '')
-                    {
-                        $(this).siblings('em').text('This field is required').css('color', 'red');
-                        isValid = false;
-                    }
-                    else
-                    {
-                        $(this).siblings('em').text('');
-                    }
-                });
-            });
-            return isValid;
-        }
+        // function isEducation()
+        // {
+        //     let isValid = true;
+        //     $('#education-body tr').each(function()
+        //     {
+        //         $(this).find('input').each(function()
+        //         {
+        //             if ($(this).val() === '')
+        //             {
+        //                 $(this).siblings('em').text('This field is required').css('color', 'red');
+        //                 isValid = false;
+        //             }
+        //             else
+        //             {
+        //                 $(this).siblings('em').text('');
+        //             }
+        //         });
+        //     });
+        //     return isValid;
+        // }
 
-        function validate_data()
-        {
-            fname = $('#fname').val();
-            lname = $('#lname').val();
-            age = $('#age').val();
-            mobile = $('#mobile').val();
-            dob = $('#dob').val();
-            gender = $('#gender').val();
-            email = $('#email').val();
+        // function validate_data()
+        // {
+        //     fname = $('#fname').val();
+        //     lname = $('#lname').val();
+        //     age = $('#age').val();
+        //     mobile = $('#mobile').val();
+        //     dob = $('#dob').val();
+        //     gender = $('#gender').val();
+        //     email = $('#email').val();
 
-            // alert("Values fetch");
+        //     // alert("Values fetch");
 
-            var validations =
-            [
-                isName(fname),
-                isName(lname),
-                isAge(age),
-                isDob(dob),
-                isGender(gender),
-                isMobile(mobile),
-                isEmail(email),
-                isEducation()
-            ];
+        //     var validations =
+        //     [
+        //         isName(fname),
+        //         isName(lname),
+        //         isAge(age),
+        //         isDob(dob),
+        //         isGender(gender),
+        //         isMobile(mobile),
+        //         isEmail(email),
+        //         isEducation()
+        //     ];
 
-            if(validations.every(validation => validation === true))
-            {
-                return true;
-            }
-            else
-            {
-                alert('Not Validate');
-                return false;
-            }
-        }
+        //     if(validations.every(validation => validation === true))
+        //     {
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         alert('Not Validate');
+        //         return false;
+        //     }
+        // }
     </script>
 </body>
 </html>

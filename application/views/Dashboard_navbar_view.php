@@ -1,5 +1,5 @@
     <div class="sidebar">
-        <h2><?php echo $user_data['name']; ?></h2>
+        <h2><?php echo $user_data['fname'],' ',$user_data['mname'],' ',$user_data['lname']; ?></h2>
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active text-white" href="<?php echo base_url('dashboard'); ?>">Dashboard</a>
@@ -10,14 +10,14 @@
                 </a>
                 <div class="collapse" id="components">
                     <ul class="nav flex-column ms-3">
-                        <?php if($user_data['level'] == 'admin') { ?>
-                            <li class="nav-item"><a class="nav-link text-white" href="<?php echo base_url('admin-list') ?>">Admin</a></li>
+                        <?php if($user_data['level'] == 'Admin') { ?>
+                            <li class="nav-item"><a class="nav-link text-white" href="<?php echo base_url('dashboard/user-list/admin') ?>">Admin</a></li>
                         <?php } ?>
-                        <?php if($user_data['level'] == 'admin' || $user_data['level'] == 'senior') { ?>
-                            <li class="nav-item"><a class="nav-link text-white" href="<?php echo base_url('senior-list') ?>">Senior</a></li>
+                        <?php if($user_data['level'] == 'Admin' || $user_data['level'] == 'Senior') { ?>
+                            <li class="nav-item"><a class="nav-link text-white" href="<?php echo base_url('dashboard/user-list/senior') ?>">Senior</a></li>
                         <?php } ?>
-                        <?php if($user_data['level'] == 'admin' || $user_data['level'] == 'senior' || $user_data['level'] == 'entry') { ?>
-                            <li class="nav-item"><a class="nav-link text-white" href="<?php echo base_url('entry-list') ?>">Entry</a></li>
+                        <?php if($user_data['level'] == 'Admin' || $user_data['level'] == 'Senior' || $user_data['level'] == 'Entry') { ?>
+                            <li class="nav-item"><a class="nav-link text-white" href="<?php echo base_url('dashboard/user-list/entry') ?>">Entry</a></li>
                         <?php } ?>
                     </ul>
                 </div>

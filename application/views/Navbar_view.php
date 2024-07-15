@@ -10,7 +10,7 @@
           <a class="nav-link active" aria-current="page" href="<?php echo base_url('registration-page') ?>">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('login') ?>">Log in</a>
+          <a class="nav-link" href="<?php echo base_url('login-view') ?>">Log in</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('dashboard') ?>">Dashboard</a>

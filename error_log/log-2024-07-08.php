@@ -232,3 +232,16 @@ ERROR - 2024-07-08 21:05:29 --> Severity: Warning --> Undefined variable $user_d
 ERROR - 2024-07-08 21:05:29 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp\htdocs\ums\application\views\Dashboard_navbar_view.php 19
 ERROR - 2024-07-08 21:05:29 --> Severity: Warning --> Undefined variable $user_data C:\xampp\htdocs\ums\application\views\Dashboard_navbar_view.php 19
 ERROR - 2024-07-08 21:05:29 --> Severity: Warning --> Trying to access array offset on value of type null C:\xampp\htdocs\ums\application\views\Dashboard_navbar_view.php 19
+ERROR - 2024-07-08 22:32:40 --> Severity: error --> Exception: syntax error, unexpected token "}", expecting variable C:\xampp\htdocs\ums\application\models\Ums_model.php 36
+ERROR - 2024-07-08 23:20:56 --> Severity: Warning --> pg_query(): Query failed: ERROR:  column &quot;mobile&quot; does not exist
+LINE 4: AND &quot;mobile&quot; = '8116616454'
+            ^ C:\xampp\htdocs\ums\system\database\drivers\postgre\postgre_driver.php 234
+ERROR - 2024-07-08 23:20:56 --> Query error: ERROR:  column "mobile" does not exist
+LINE 4: AND "mobile" = '8116616454'
+            ^ - Invalid query: SELECT *
+FROM "userlogin"
+WHERE "email" = 'admin@ums.com'
+AND "mobile" = '8116616454'
+ERROR - 2024-07-08 23:36:20 --> Severity: error --> Exception: Call to undefined method CI_Session::checkem() C:\xampp\htdocs\ums\application\views\Forgot_password.php 64
+ERROR - 2024-07-08 23:37:11 --> Severity: error --> Exception: Call to undefined method CI_Session::checkem() C:\xampp\htdocs\ums\application\views\Forgot_password.php 64
+ERROR - 2024-07-08 23:37:21 --> Severity: error --> Exception: Call to undefined method CI_Session::checkem() C:\xampp\htdocs\ums\application\views\Forgot_password.php 64

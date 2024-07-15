@@ -8,8 +8,28 @@ class Ums_model extends CI_Model {
         $this->load->database();
     }
 
-    public function insert_data($data) {
-        $this->db->insert('userinfo', $data);
+    public function insert_info($user_data)
+    {
+        $this->db->insert('userinfo', $user_data);
+        return $this->db->insert_id(); // RETURN THE AUTO_INCREAMENTED ID
+    }
+
+    public function insert_login($login_data)
+    {
+        $this->db->insert('userlogin', $login_data);
+        if($this->db->affected_rows()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function insert_education($education_data)
+    {
+        $this->db->insert('education', $education_data);
         if($this->db->affected_rows()>0)
         {
             return true;
@@ -26,9 +46,24 @@ class Ums_model extends CI_Model {
         return $user;
     }
 
-    public function get_data()
+    public function reset_password($email, $mobile, $data)
     {
-        $data = $this->db->select("id, CONCAT(fname, ' ', mname, ' ', lname) AS name, age, dob, gender, mobile_no, email")->from('userinfo')->get()->result_array();
-        return $data;
+        $this->db->where('email', $email);
+        $this->db->where('mobile_no', $mobile);
+        $this->db->update('userlogin', $data);
+        if($this->db->affected_rows()>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function check_email_mobile($email, $mobile)
+    {
+        $check = $this->db->from('userlogin')->where('email', $email)->where('mobile_no', $mobile)->get()->num_rows();
+        return $check;
     }
 }

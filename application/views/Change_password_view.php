@@ -35,6 +35,12 @@
 <body>
     <?php $this->load->view('Dashboard_navbar_view'); ?>
     <div class="content">
+        <?php if($this->session->flashdata('password_not_changed')){ ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Your password has not changed
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
         <form action="<?php echo base_url('change-password') ?>" method="POST">
             <div class="form-group">
                 <label for="exampleInputPassword1">Current Password</label>

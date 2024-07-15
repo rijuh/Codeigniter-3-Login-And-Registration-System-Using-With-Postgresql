@@ -12,6 +12,10 @@
         body {
             display: flex;
         }
+        a {
+            color: white;
+            text-decoration: none;
+        }
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -36,13 +40,17 @@
 <body>
     <?php $this->load->view('Dashboard_navbar_view'); ?>
     <div class="content">
-        <h2 class="mb-4">Entry Table</h2>
+        <h2 class="mb-4"><?php echo $level; ?> Table</h2>
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>Sl No.</th>
                     <th>Name</th>
+                    <th>Age</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
                     <th>Email</th>
+                    <th>Mobile</th>
                     <th>Level</th>
                     <th>Action</th>
                 </tr>
@@ -53,12 +61,16 @@
                     <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $au['name']; ?></td>
+                        <td><?php echo $au['age']; ?></td>
+                        <td><?php echo $au['dob']; ?></td>
+                        <td><?php echo $au['gender']; ?></td>
                         <td><?php echo $au['email']; ?></td>
+                        <td><?php echo $au['mobile_no']; ?></td>
                         <td><?php echo $au['level']; ?></td>
                         <td>
-                            <button class="btn btn-success btn-sm">View</button>
+                            <button class="btn btn-success btn-sm"><a href="<?php echo base_url('view-profile/'.$au['id']); ?>">View</a></button>
                             <button class="btn btn-primary btn-sm">Edit</button>
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(<?php echo $au['id']; ?>)">Delete</button>
                         </td>
                     </tr>
                 <?php $i++; } ?>
@@ -77,6 +89,27 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+
+        function confirmDelete(user_id) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                $.ajax({
+                    url: '<?php echo base_url('dashboard/delete-user/'); ?>' + user_id,
+                    type: 'POST',
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        if (result.status === 'success') {
+                            $('#row-' + user_id).remove();
+                            alert('User deleted successfully.');
+                        } else {
+                            alert('Error deleting user.');
+                        }
+                    },
+                    error: function() {
+                        alert('Error deleting user.');
+                    }
+                });
+            }
+        }
     </script>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

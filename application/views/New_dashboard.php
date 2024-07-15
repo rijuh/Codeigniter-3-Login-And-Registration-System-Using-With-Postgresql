@@ -34,6 +34,12 @@
 <body>
     <?php $this->load->view('Dashboard_navbar_view'); ?>
     <div class="content">
+        <?php if($this->session->flashdata('password_changed')){ ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Your password has changed
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
         <!-- <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">Dashboard</a>
             <form class="d-flex">
@@ -59,32 +65,32 @@
             <h2>Dashboard</h2>
         </div>
         <div class="row">
-            <?php if($user_data['level'] == 'admin') { ?>
+            <?php if($user_data['level'] == 'Admin') { ?>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">ADMIN</h5>
-                        <p class="card-text"></p>
+                        <p class="card-text"><b>Total - <?php echo $count_user['count_admin']; ?></b></p>
                     </div>
                 </div>
             </div>
             <?php } ?>
-            <?php if($user_data['level'] == 'admin' || $user_data['level'] == 'senior') { ?>
+            <?php if($user_data['level'] == 'Admin' || $user_data['level'] == 'Senior') { ?>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">SENIOR</h5>
-                        <p class="card-text"></p>
+                        <p class="card-text"><b>Total - <?php echo $count_user['count_senior']; ?></b></p>
                     </div>
                 </div>
             </div>
             <?php } ?>
-            <?php if($user_data['level'] == 'admin' || $user_data['level'] == 'senior' || $user_data['level'] == 'entry') { ?>
+            <?php if($user_data['level'] == 'Admin' || $user_data['level'] == 'Senior' || $user_data['level'] == 'Entry') { ?>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">ENTRY</h5>
-                        <p class="card-text"></p>
+                        <p class="card-text"><b>Total - <?php echo $count_user['count_admin']; ?></b></p>
                     </div>
                 </div>
             </div>
