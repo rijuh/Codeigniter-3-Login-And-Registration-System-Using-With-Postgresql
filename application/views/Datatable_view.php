@@ -69,7 +69,7 @@
                         <td><?php echo $au['level']; ?></td>
                         <td>
                             <button class="btn btn-success btn-sm"><a href="<?php echo base_url('view-profile/'.$au['id']); ?>">View</a></button>
-                            <button class="btn btn-primary btn-sm">Edit</button>
+                            <button class="btn btn-primary btn-sm"><a href="<?php echo base_url('dashboard/edit-profile/'.$au['id']); ?>">Edit</button>
                             <button class="btn btn-danger btn-sm" onclick="confirmDelete(<?php echo $au['id']; ?>)">Delete</button>
                         </td>
                     </tr>

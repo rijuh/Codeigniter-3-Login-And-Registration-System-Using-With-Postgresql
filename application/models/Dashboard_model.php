@@ -89,4 +89,22 @@ class Dashboard_model extends CI_Model {
     {
         return $this->db->delete('education', ['user_id' => $id]);
     }
+
+    public function update_info($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('userinfo', $data);
+    }
+
+    public function update_login($id, $data)
+    {
+        $this->db->where('user_id', $id);
+        $this->db->update('userlogin', $data);
+    }
+
+    public function update_education($id, $data)
+    {
+        $this->db->where('user_id', $id);
+        $this->db->update('education', $data);
+    }
 }
