@@ -16,6 +16,9 @@
           <a class="nav-link" href="<?php echo base_url('dashboard') ?>">Dashboard</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('new-forgot-password') ?>">Forgot Password</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>

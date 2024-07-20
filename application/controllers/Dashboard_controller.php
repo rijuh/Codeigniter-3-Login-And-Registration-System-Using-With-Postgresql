@@ -57,35 +57,6 @@ class Dashboard_controller extends CI_Controller
         }
     }
 
-    public function senior_list()
-    {
-        if($this->session->userdata('islogin'))
-        {
-            $id = $this->session->userdata('id');
-            $data['user_data'] = $this->Dashboard_model->get_user_by_id($id);
-            $data['all_user'] = $this->Dashboard_model->all_senior();
-            $this->load->view('Datatable_senior_view', $data);
-        }
-        else
-        {
-            return redirect(base_url('login-view'), 'refresh');
-        }
-    }
-
-    public function entry_list()
-    {
-        if($this->session->userdata('islogin'))
-        {
-            $id = $this->session->userdata('id');
-            $data['user_data'] = $this->Dashboard_model->get_user_by_id($id);
-            $data['all_user'] = $this->Dashboard_model->all_entry();
-            $this->load->view('Datatable_entry_view', $data);
-        }
-        else
-        {
-            return redirect(base_url('login-view'), 'refresh');
-        }
-    }
 
     public function change_password()
     {

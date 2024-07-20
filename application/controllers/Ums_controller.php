@@ -282,30 +282,72 @@ class Ums_controller extends CI_Controller
 
     public function reset_password()
     {
-            $email = $this->input->post('email');
-            $mobile = $this->input->post('mobile');
-            $new_password = $this->input->post('new-password');
-            $confirm_password = $this->input->post('confirm-password');
-            if($new_password !== $confirm_password)
+        $email = $this->input->post('email');
+        $mobile = $this->input->post('mobile');
+        $new_password = $this->input->post('new-password');
+        $confirm_password = $this->input->post('confirm-password');
+        if($new_password !== $confirm_password)
+        {
+            $this->session->set_flashdata('notMatched', 'Password not matched');
+            redirect(base_url('forgot-password'));
+        }
+        else
+        {
+            $data = array('password' => $new_password);
+            $status = $this->Ums_model->reset_password($email, $mobile, $data);
+            if($status)
             {
-                $this->session->set_flashdata('notMatched', 'Password not matched');
-                redirect(base_url('forgot-password'));
+                $this->session->set_flashdata('PasswordReset', 'Password has been reset');
+                redirect(base_url('login-view'));
             }
             else
             {
-                $data = array('password' => $new_password);
-                $status = $this->Ums_model->reset_password($email, $mobile, $data);
-                if($status)
-                {
-                    $this->session->set_flashdata('PasswordReset', 'Password has been reset');
-                    redirect(base_url('login-view'));
-                }
-                else
-                {
-                    $this->session->set_flashdata('notReset', 'Password not reset');
-                    redirect(base_url('forgot-password'));
-                }
+                $this->session->set_flashdata('notReset', 'Password not reset');
+                redirect(base_url('forgot-password'));
             }
+        }
             
+    }
+
+    public function send_mail()
+    {
+        // Generate a random 4-digit code
+        $verification_code = rand(1000, 9999);
+
+        // Email configuration
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_port' => 587, // or 465 for SSL
+            'smtp_user' => 'rijuh739@gmail.com',
+            'smtp_pass' => 'ycew epnz wogs mcef',
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n",
+            'smtp_crypto' => 'tls'
+        );
+
+        $this->email->initialize($config);
+
+        // Email details
+        $this->email->from('rijuh739@gmail.com', 'Riju');
+        $this->email->to('bidisaadak@gmail.com'); // Replace with the recipient's email
+        $this->email->subject('Your Verification Code');
+        $this->email->message('Your verification code is: ' . $verification_code);
+
+        // Send email
+        if ($this->email->send())
+        {
+            echo 'Verification code sent successfully.';
+        }
+        else
+        {
+            show_error($this->email->print_debugger());
+        }
+    }
+
+    public function new_forgot_password()
+    {
+        $this->load->view('Forgot_password_new');
     }
 }
