@@ -43,7 +43,7 @@
     <div class="container">
         <div class="login-container">
             <h2 class="text-center login-title">Recover Password</h2>
-            <form method="post" action="<?php echo base_url('reset-password'); ?>">
+            <form method="post" action="<?php echo base_url('new-forgot-password'); ?>">
                 <div class="form-group">
                     <label for="loginId">Email*</label>
                     <input type="text" class="form-control" id="email" placeholder="Enter your email id" name="email" autocomplete="off" >
@@ -56,18 +56,6 @@
                     <em id="password-em"></em>
                     <?php echo form_error('mobile', '<div class="error">', '</div>'); ?>
                 </div>
-                    <div class="form-group">
-                        <label for="new-password">New Password*</label>
-                        <input type="password" class="form-control" id="new-password" placeholder="Enter your new password" name="new-password">
-                        <em id="password-em"></em>
-                        <?php echo form_error('password', '<div class="error">', '</div>'); ?>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password">Confirm Password*</label>
-                        <input type="password" class="form-control" id="confirm-password" placeholder="Enter your confirm password" name="confirm-password">
-                        <em id="password-em"></em>
-                        <?php echo form_error('password', '<div class="error">', '</div>'); ?>
-                    </div>
                 <button type="submit" class="btn btn-primary btn-block login-button" id="submit-btn">Change Password</button>
             </form>
         </div>

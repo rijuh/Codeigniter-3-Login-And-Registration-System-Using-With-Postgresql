@@ -34,6 +34,12 @@ class Dashboard_model extends CI_Model {
         return $user_data;
     }
 
+    public function get_userlist_by_level($level)
+    {
+        $user_list = $data = $this->db->select("id, CONCAT(fname,' ',mname,' ',lname) AS name, dob, age, email, mobile_no, gender, level")->from('userinfo')->where('level', $level)->get()->result_array();
+        return $user_list;
+    }
+
     public function all_admin()
     {
         $data = $this->db->select("id, CONCAT(fname,' ',mname,' ',lname) AS name, dob, age, email, mobile_no, gender, level")->from('userinfo')->where('level', 'Admin')->get()->result_array();

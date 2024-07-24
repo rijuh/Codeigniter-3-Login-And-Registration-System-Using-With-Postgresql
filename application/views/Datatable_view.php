@@ -76,6 +76,7 @@
                 <?php $i++; } ?>
             </tbody>
         </table>
+        <button class="btn btn-primary btn-sm"><a href="<?php echo base_url('dashboard/download-excel/'.$au['level']); ?>">Download Excel</a></button>
     </div>
 
     <!-- jQuery -->

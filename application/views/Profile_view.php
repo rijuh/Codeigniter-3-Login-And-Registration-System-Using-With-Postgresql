@@ -36,6 +36,10 @@
         .card {
             margin-bottom: 20px;
         }
+        a {
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -166,7 +170,7 @@
 
                         <div class="form-group text-right mt-4">
                             <button type="button" class="btn btn-primary"><a href="<?php echo base_url('dashboard/edit-profile/'.$user_profile['id']); ?>">Edit</a></button>
-                            <button type="submit" class="btn btn-primary">Download PDF</button>
+                            <button type="button" class="btn btn-primary"><a href="<?php echo base_url('dashboard/download-pdf/'.$user_profile['id']); ?>">Download PDF</a></button>
                         </div>
                     </form>
                 </div>

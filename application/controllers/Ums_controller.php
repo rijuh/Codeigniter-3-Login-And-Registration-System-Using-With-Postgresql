@@ -309,7 +309,7 @@ class Ums_controller extends CI_Controller
             
     }
 
-    public function send_mail()
+    public function send_mail($email)
     {
         // Generate a random 4-digit code
         $verification_code = rand(1000, 9999);
@@ -331,23 +331,89 @@ class Ums_controller extends CI_Controller
 
         // Email details
         $this->email->from('rijuh739@gmail.com', 'Riju');
-        $this->email->to('bidisaadak@gmail.com'); // Replace with the recipient's email
+        $this->email->to($email);
         $this->email->subject('Your Verification Code');
         $this->email->message('Your verification code is: ' . $verification_code);
 
         // Send email
         if ($this->email->send())
         {
-            echo 'Verification code sent successfully.';
+            return $verification_code;
         }
         else
         {
-            show_error($this->email->print_debugger());
+            // show_error($this->email->print_debugger());
+           return false;
         }
     }
 
     public function new_forgot_password()
     {
+        if($this->input->server('REQUEST_METHOD') == 'POST')
+        {
+            $email = $this->input->post('email');
+            $mobile = $this->input->post('mobile');
+            $check = $this->Ums_model->check_email_mobile($email, $mobile);
+            if($check)
+            {
+                $otp = $this->send_mail($email);
+                if($otp)
+                {
+                    $data = $this->Ums_model->login_user($email);
+                    $otp_data = array
+                    (
+                        'email' => $data['email'],
+                        'otp' => $otp,
+                        'user_id' => $data['id']
+                    );
+                    $this->Ums_model->save_otp($otp_data);
+                    $this->session->set_userdata($otp_data);
+                    redirect('verify-otp');
+                }
+            }
+        }
         $this->load->view('Forgot_password_new');
+    }
+
+    public function verify_otp()
+    {
+        if($this->input->server('REQUEST_METHOD') == 'POST')
+        {
+            $otp = $this->input->post('otp');
+            $email = $this->session->userdata('email');
+            $fetch_otp = $this->session->userdata('otp');
+            if($otp == $fetch_otp)
+            {
+                redirect('reset-new-password');
+            }
+            else
+            {
+                redirect('verify-otp');
+            }
+
+        }
+        $this->load->view('Otp_view');
+    }
+
+    public function reset_new_password()
+    {
+        if($this->input->server('REQUEST_METHOD') == 'POST')
+        {
+            $new_password = $this->input->post('new-password');
+            $confirm_password = $this->input->post('confirm-password');
+            $email = $this->session->userdata('email');
+            if($new_password == $confirm_password)
+            {
+                $data = array('password' => $new_password);
+                $status = $this->Ums_model->reset_new_password($email, $data);
+                $this->session->unset_userdata($otp_data);
+                redirect('login-view');
+            }
+            else
+            {
+                redirect('reset-new-password');
+            }
+        }
+        $this->load->view('Reset_new_password');
     }
 }

@@ -61,6 +61,8 @@ $route['forgot-password'] = 'Ums_controller/forgot_password/';
 $route['check-user'] = 'Ums_controller/check_user/';
 $route['reset-password'] = 'Ums_controller/reset_password/';
 $route['new-forgot-password'] = 'Ums_controller/new_forgot_password/';
+$route['verify-otp'] = 'Ums_controller/verify_otp/';
+$route['reset-new-password'] = 'Ums_controller/reset_new_password';
 $route['dashboard'] = 'Dashboard_controller/index/';
 $route['dashboard/user-list/(:any)'] = 'Dashboard_controller/user_list/$1';
 $route['view-profile/(:num)'] = 'Dashboard_controller/profile_view/$1';
@@ -69,3 +71,6 @@ $route['dashboard/edit-submit/(:num)'] = 'Dashboard_controller/edit_submit/$1';
 $route['dashboard/delete-user/(:num)'] = 'Dashboard_controller/delete_user/$1';
 $route['change-password'] = 'Dashboard_controller/change_password/';
 $route['logout'] = 'Dashboard_controller/logout/';
+
+$route['dashboard/download-pdf/(:num)'] = 'Download_controller/download_pdf/$1';
+$route['dashboard/download-excel/(:any)'] = 'Download_controller/download_excel/$1';

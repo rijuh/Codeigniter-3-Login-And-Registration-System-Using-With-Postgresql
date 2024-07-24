@@ -61,9 +61,20 @@ class Ums_model extends CI_Model {
         }
     }
 
+    public function reset_new_password($email, $data)
+    {
+        $this->db->where('email', $email);
+        $this->db->update('userlogin', $data);
+    }
+
     public function check_email_mobile($email, $mobile)
     {
         $check = $this->db->from('userlogin')->where('email', $email)->where('mobile_no', $mobile)->get()->num_rows();
         return $check;
+    }
+
+    public function save_otp($data)
+    {
+        $this->db->insert('otp', $data);
     }
 }

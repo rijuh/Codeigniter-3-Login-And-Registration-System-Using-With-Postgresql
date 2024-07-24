@@ -39,3 +39,11 @@ CREATE TABLE education
 	f_marks INT,
 	user_id INT REFERENCES userinfo(id) 
 );
+
+CREATE TABLE otp
+(
+	otp_id SERIAL PRIMARY KEY,
+	email VARCHAR(50),
+	otp DECIMAL(4,0),
+	user_id INT
+);
